@@ -37,6 +37,17 @@
         },
         "unique_name": "variable_workflow_01GrzHrersNk57F5dy2boKv0rQLTWCBbY",
         "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "01GQt8FN7WKR07hAVSobvqmJvxJDfmS53",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "testing",
+          "type": "datatype.boolean"
+        },
+        "unique_name": "variable_workflow_01GSDKqQAFsETTvJlrivAIxAEWvN7D8SM",
+        "object_type": "variable_workflow"
       }
     ],
     "properties": {
