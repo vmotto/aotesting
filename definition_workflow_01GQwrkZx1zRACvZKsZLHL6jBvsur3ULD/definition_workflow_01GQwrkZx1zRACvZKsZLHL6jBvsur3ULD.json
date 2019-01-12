@@ -1,0 +1,132 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01GQwrkZx1zRACvZKsZLHL6jBvsur3ULD",
+    "name": "C3-Users-Test",
+    "title": "C3-Users-Test",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "TEST: Just get a list of C3 users in Admin Tenant",
+      "display_name": "C3-Users-Test",
+      "favorite": false,
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_01GQwP6vtkMqTKBMi0hNhR3T8hsrWwivy",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01GQwyumv1j5wcNzhZKfSaLgXlKlpcqE5",
+        "name": "HTTP Request",
+        "title": "HTTP Request",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "HTTP Request",
+          "method": "GET",
+          "relative_url": "/v1/users",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GQXM8QiVboyHNBlqmm2Y6XABSVvdr0q",
+        "name": "Read Table from JSON",
+        "title": "Read Table from JSON",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Read Table from JSON",
+          "input_json": "$activity.definition_activity_01GQwyumv1j5wcNzhZKfSaLgXlKlpcqE5.output.response_body$",
+          "jsonpath_query": "$.users[*]",
+          "persist_output": true,
+          "populate_columns": false,
+          "table_columns": [
+            {
+              "column_name": "id",
+              "column_type": "string",
+              "zdate_type_format": ""
+            },
+            {
+              "column_name": "username",
+              "column_type": "string",
+              "zdate_type_format": ""
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01GrX5dI09WWMVN1QOvfo2c1L5UimZ0hk"
+    ]
+  },
+  "categories": {
+    "category_01GrX5dI09WWMVN1QOvfo2c1L5UimZ0hk": {
+      "unique_name": "category_01GrX5dI09WWMVN1QOvfo2c1L5UimZ0hk",
+      "name": "CloudCenter",
+      "title": "CloudCenter",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "For CloudCenter Automation (pre-5.0)",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01GQwP6vtkMqTKBMi0hNhR3T8hsrWwivy": {
+      "unique_name": "definition_target_01GQwP6vtkMqTKBMi0hNhR3T8hsrWwivy",
+      "name": "svs-ccm-1",
+      "title": "svs-ccm-1",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01GQwn9TV13WyeemHH6vQUytkA7yIPaRm",
+        "disable_certificate_validation": true,
+        "display_name": "svs-ccm-1",
+        "host": "10.100.1.15",
+        "no_runtime_user": false,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01GQwn9TV13WyeemHH6vQUytkA7yIPaRm": {
+      "unique_name": "definition_runtime_user_01GQwn9TV13WyeemHH6vQUytkA7yIPaRm",
+      "name": "cliqradmin1",
+      "title": "cliqradmin1",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "description": "admin user for svs-ccm-1",
+        "display_name": "cliqradmin1"
+      }
+    }
+  }
+}
